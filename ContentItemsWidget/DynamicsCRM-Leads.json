@@ -1,0 +1,54 @@
+{
+  "configTypeKey": "widget_contentItems",
+  "connectableKey": "DynamicsLeads",
+  "title": {
+    "en": "Dynamics Leads"
+  },
+  "tabs": [
+    {
+      "title": {
+        "en": "Dynamics Leads"
+      },
+      "searchPlaceholder": {
+        "expression": "_mp.util.translate('search')"
+      },
+      "connectableKey": "tab",
+      "data": {
+        "contentType": "ListItem",
+        "configTypeKey": "dataProvider_dynamics",
+        "dynamicsInstanceUrl": "<DynamicsTenant>",
+        "apiUrl": "/api/data/v9.0/leads?$select=fullname,jobtitle,leadid,companyname,entityimage_url&$top=20",
+        "connectableKey": "dynamics",
+        "itemsExpression": "result.value",
+        "filterExpression": {"expression": "'contains(fullname,%27' + searchText + '%27)'"},
+        "searchText": {
+          "expression": "_mp.connectable.objects.DynamicsLeads_tab_search"
+        },
+        "propertyMappings": "propertyMapper_dynamics_leads_simple"
+      },
+      "layoutTemplate": {
+        "configTypeKey": "layoutTemplate_list",
+        "columns": 2
+      },
+      "itemTemplate": {
+        "configTypeKey": "itemTemplate_simple",
+        "imageWidth": "2.5rem",
+        "imageDisplayMode": "Round"
+      },
+      "showSearch": true,
+      "showPreview": false,
+      "actions": [
+        {
+          "configTypeKey": "widget_components_actionButton",
+          "accentAction": false,
+          "title": {
+            "expression": "_mp.util.translate('viewAll')"
+          },
+          "action": {
+            "expression": "window.open(_mp.connectable.objects.dynamics.viewAllUrl.value);"
+          }
+        }
+      ]
+    }
+  ]
+}
