@@ -11,7 +11,7 @@ under "Folders" select Make "New Folder" command available?: No
 Then add the widget to a page by using the following configuration and replacing the placeholders <YourTenant> and <LinksList>.
 */
 
-"myLinks": {
+{
   "configTypeKey": "widget_contentItems",
   "connectableKey": "MyLinks",
   "tabs": [
