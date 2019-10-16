@@ -1,0 +1,18 @@
+{
+  "contentType": "News",
+  "dataSource": {
+    "configTypeKey": "userDataSource_Rest",
+    "restUrl": "<web_api_url>",
+    "itemsExpression": "result.articles",
+    "propertyMappingsKey": {
+      "title": "item.title",
+      "onClickUrl": "item.url",
+      "image": "item.urlToImage",
+      "subTitle": "item.subTitle"
+    }
+  },
+  "backgroundColor": null,
+  "icon": "globe-earth",
+  "noBackgroundImage": false,
+  "numberOfBullets": 5
+}
