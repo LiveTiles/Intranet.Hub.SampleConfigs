@@ -1,0 +1,38 @@
+{
+  "id": "search_Condense",
+  "title": {
+    "expression": "_mp.util.translate('condenseNews')"
+  },
+  "webPart": {
+    "configTypeKey": "webPart_aggregation",
+    "itemTemplate": {
+      "configTypeKey": "searchItemTemplate_condenseNews"
+    },
+    "layoutTemplate": {
+      "configTypeKey": "layoutTemplate_flow"
+    },
+    "dataProvider": {
+      "version": "v1.0",
+      "configTypeKey": "dataProvider_condense_news",
+      "propertyMappings": "propertyMapper_condense_news_simple",
+      "connectableKey": "searchResults_Condense",
+      "rowLimit": 30,
+      "fromAllNews": true,
+      "searchText": {
+        "expression": "_mp.connectable.objects.searchForm"
+      }
+    },
+    "noItemsPlaceholder": {
+      "message": {
+        "expression": "_mp.util.translate('noContentFound')"
+      },
+      "icon": "search-document",
+      "style": {
+        "paddingTop": "60px",
+        "iconSize": "10rem",
+        "messageSize": "2em",
+        "color": "#fff"
+      }
+    }
+  }
+}
