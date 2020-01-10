@@ -1,0 +1,38 @@
+{
+  "configTypeKey": "widget_contentItems",
+  "title": "Condense Events",
+  "connectableKey": "Events",
+  "tabs": [
+    {
+      "title": {
+        "expression": "_mp.util.translate('events')"
+      },
+      "connectableKey": "EventsTab",
+      "data": {
+        "version": "v1.0",
+        "configTypeKey": "dataProvider_condense_events",
+        "propertyMappings": "propertyMapper_condense_event_simple"
+      },
+      "layoutTemplate": {
+        "configTypeKey": "layoutTemplate_list"
+      },
+      "itemTemplate": {
+        "configTypeKey": "itemTemplate_event_simple"
+      },
+      "showSearch": false,
+      "showPreview": false,
+      "actions": [
+        {
+          "accentAction": false,
+          "title": {
+            "expression": "_mp.util.translate('viewAll')"
+          },
+          "action": {
+            "expression": "window.open(_mp.connectable.objects.Events_EventsTab_dataProvider.viewAllUrl.value);"
+          },
+          "actionKey": "action_viewAll"
+        }
+      ]
+    }    
+  ]
+}
