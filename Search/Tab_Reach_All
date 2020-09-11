@@ -1,0 +1,210 @@
+{
+          "id": "search_Condense_GraphQL",
+          "title": "Reach",
+          "webPart": {
+            "configTypeKey": "webPart_aggregation",
+            "itemTemplate": {
+              "configTypeKey": "searchItemTemplate_multiContentType"
+            },
+            "layoutTemplate": {
+              "configTypeKey": "layoutTemplate_flow"
+            },
+            "dataProvider": {
+              "configTypeKey": "dataProvider_condense_graphQL",
+              "version": "v1.0",
+              "searchText": {
+                "expression": "_mp.connectable.objects.searchForm"
+              },
+              "conditionsProvider": {
+                "connectableKey": "Search_filters_GQL"
+              },
+              "rowLimit": 20,
+              "propertyMappings": [
+                {
+                  "mappings": "propertyMapper_condense_news_simple",
+                  "additionalPropertyMappings": [
+                    {
+                      "heroFloater": {
+                        "type": "'Date'",
+                        "value": "null"
+                      }
+                    }
+                  ],
+                  "itemTemplate": {
+                    "configTypeKey": "searchItemTemplate_condenseNews"
+                  },
+                  "matchCondition": {
+                    "expression": "item.type === 'NEWS'"
+                  }
+                },
+                {
+                  "mappings": "propertyMapper_condense_post_simple",
+                  "itemTemplate": {
+                    "configTypeKey": "searchItemTemplate_condensePost"
+                  },
+                  "matchCondition": {
+                    "expression": "item.type === 'POST'"
+                  }
+                },
+                {
+                  "mappings": "propertyMapper_condense_event_simple",
+                  "itemTemplate": {
+                    "configTypeKey": "searchItemTemplate_condenseEvent"
+                  },
+                  "matchCondition": {
+                    "expression": "item.type === 'EVENT'"
+                  }
+                }
+              ],
+              "query": {
+                "expression": "`{  allItems( where: ${filters} searchText: ${searchText}    order_by: { publishingDate: DESC }    skip: ${skip}    take: ${take}  ) {    __typename    ... on NewsItem {      type      id      publishingDate      author {        displayName        id        mail        userPrincipalName      }      owner {        displayName        id        mail        userPrincipalName      }      contents(language: \"en\") {        title        intro      }      bannerInfo {        type        videoId        videoSource        imageId      }      bannerUrl(width: 600)      permalink      channels {        name      }      keywords {        name      }    }    ... on EventItem {      type      id      permalink      startDate      endDate      publishingDate      contents(language: \"en\") {        title      }      owner {        displayName        userPrincipalName      }      registrationSettings {        deadline        enabled      }   statistics {  participantsCount }   channels {        name      }      locations {        locationOnMap        maxNumberOfSeats        name        url      }      bannerInfo {        imageId        type        videoId        videoSource      }    }    ... on PostItem {      id      type      permalink      publishingDate      content      author {        displayName      }      statistics {        likeCount        commentCount      }    }  }}`"
+              },
+              "connectableKey": "searchResults_Condense_GrahpQL"
+            },
+            "noItemsPlaceholder": {
+              "message": {
+                "expression": "_mp.util.translate('noContentFound')"
+              },
+              "icon": "search-document",
+              "style": {
+                "paddingTop": "60px",
+                "iconSize": "10rem",
+                "messageSize": "2em",
+                "color": "#fff"
+              }
+            }
+          },
+          "refinement": {
+            "configTypeKey": "widget_filters",
+            "connectableKey": "Search_filters_GQL",
+            "title": "Filter",
+            "hideUrlField": true,
+            "compactDisplay": true,
+            "showLabels": false,
+            "filters": [
+              {
+                "displayName": "Channel",
+                "propertyName": "channels_some",
+                "type": "MultiChoice",
+                "items": [],
+                "itemsDataProvider": {
+                  "configTypeKey": "dataProvider_condense_channels",
+                  "propertyMappings": "propertyMapper_condense_channels_filter",
+                  "additionalPropertyMappings": [
+                    {
+                      "value": "'{element: \"' + item.id + '\"}'"
+                    }
+                  ]
+                }
+              },
+              {
+                "displayName": "Keywords",
+                "propertyName": "keywordIds_some",
+                "type": "MultiChoice",
+                "items": [],
+                "itemsDataProvider": {
+                  "configTypeKey": "dataProvider_condense_keywords",
+                  "propertyMappings": "propertyMapper_condense_keywords_filter",
+                  "additionalPropertyMappings": [
+                    {
+                      "value": "'{element: \"' + item.id + '\"}'"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "MultiChoice",
+                "propertyName": "type",
+                "displayName": "Item type",
+                "items": [
+                  {
+                    "displayName": "Post",
+                    "value": "POST"
+                  },
+                  {
+                    "displayName": "Event",
+                    "value": "EVENT"
+                  },
+                  {
+                    "displayName": "News article",
+                    "value": "NEWS"
+                  }
+                ]
+              },
+              {
+                "type": "DateRange",
+                "propertyName": "startDate",
+                "displayName": "Event Date",
+                "items": [
+                  {
+                    "displayName": "older",
+                    "value": {
+                      "expression": "'\"'+moment(0).format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "1 year ago",
+                    "value": {
+                      "expression": "'\"'+moment().subtract(1, 'year').format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "1 month ago",
+                    "value": {
+                      "expression": "'\"'+moment().subtract(1,'month').format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "today",
+                    "value": {
+                      "expression": "'\"'+moment().format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "in a month",
+                    "value": {
+                      "expression": "'\"'+moment().add(1,'month').format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "in a year",
+                    "value": {
+                      "expression": "'\"'+moment().add(1,'year').format('YYYY-MM-DD')+'\"'"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "DateRange",
+                "propertyName": "publishingDate",
+                "displayName": "Publishing Date",
+                "items": [
+                  {
+                    "displayName": "older",
+                    "value": {
+                      "expression": "'\"'+moment(0).format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "1 year ago",
+                    "value": {
+                      "expression": "'\"'+moment().subtract(1, 'year').format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "1 month ago",
+                    "value": {
+                      "expression": "'\"'+moment().subtract(1,'month').format('YYYY-MM-DD')+'\"'"
+                    }
+                  },
+                  {
+                    "displayName": "today",
+                    "value": {
+                      "expression": "'\"'+moment().format('YYYY-MM-DD')+'\"'"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
