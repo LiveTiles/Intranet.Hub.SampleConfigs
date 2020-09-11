@@ -1,0 +1,35 @@
+{
+  "configTypeKey": "widget_schedule",
+  "dataProviders": [
+    {
+      "title": {
+        "1031": "Corporate Events"
+      },
+      "dataProvider": {
+        "version": "v1.0",
+        "configTypeKey": "dataProvider_condense_events",
+        "propertyMappings": "propertyMapper_condense_event_simple"
+      },
+      "startDateFieldName": "startDate"
+    }
+  ],
+  "title": "Corporate Events",
+  "connectableKey": "condense_events",
+  "actions": [
+    {
+      "configTypeKey": "widget_components_actionButton",
+      "accentAction": false,
+      "action": {
+        "expression": "window.open(_mp.connectable.objects.condense_events_dataProvider.viewAllUrl.value);"
+      },
+      "actionKey": "action_viewAll",
+      "additionalButtonText": null,
+      "isDisabled": false,
+      "isHidden": false,
+      "title": {
+        "expression": "_mp.util.translate('viewAll')"
+      },
+      "warning": false
+    }
+  ]
+}
