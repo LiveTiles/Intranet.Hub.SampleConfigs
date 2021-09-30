@@ -1,0 +1,66 @@
+{
+  "title": {
+    "expression": "_mp.util.translate('news')"
+  },
+  "tabs": [
+    {
+      "configTypeKey": "webParts_contentItemsTab",
+      "title": {
+        "expression": "_mp.util.translate('news')"
+      },
+      "connectableKey": "ReachNews",
+      "data": {
+        "configTypeKey": "dataProvider_condense_graphQL",
+        "version": "v1.0",
+        "rowLimit": 20,
+        "propertyMappings": [
+          {
+            "mappings": "propertyMapper_condense_news_simple",
+            "additionalPropertyMappings": [
+              {
+                "heroFloater": {
+                  "type": "'Date'",
+                  "value": "null"
+                }
+              }
+            ],
+            "matchCondition": {
+              "expression": "item.type === 'NEWS'"
+            }
+          }
+        ],
+        "query": {
+          "expression": "`{  allItems(unreadOnly: true order_by: { publishingDate: DESC }  take: ${take}   ) {    __typename    ... on NewsItem {      type      id      publishingDate      author {        displayName        id        mail        userPrincipalName      }      owner {        displayName        id        mail        userPrincipalName      }      contents(language: \"en\") {        title        intro      }      bannerInfo {        type        videoId        videoSource        imageId      }      bannerUrl(width: 600)      permalink      channels {        name      }      keywords {        name      }    } }}`"
+        },
+        "connectableKey": "searchResults_Condense_GrahpQL"
+      },
+      "layoutTemplate": {
+        "configTypeKey": "layoutTemplate_list",
+        "alternatingBackground": false,
+        "scrollType": "buttons"
+      },
+      "itemTemplate": {
+        "configTypeKey": "itemTemplate_simple",
+        "imageDisplayMode": "Round",
+        "imageWidth": "49px",
+        "previewInModal": true
+      },
+      "showSearch": false,
+      "showPreview": true,
+      "previewInModal": true,
+      "actions": [
+        {
+          "configTypeKey": "widget_components_viewAllActionButton",
+          "accentAction": false,
+          "title": {
+            "expression": "_mp.util.translate('viewAll')"
+          },
+          "showSourceButton": false,
+          "actionKey": "action_viewAll"
+        }
+      ],
+      "css": null
+    }
+  ],
+  "configTypeKey": "widget_tabs"
+}
