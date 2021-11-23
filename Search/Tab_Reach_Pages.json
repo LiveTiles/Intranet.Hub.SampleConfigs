@@ -1,0 +1,38 @@
+{
+  "id": "search_reach_pages",
+  "title": {
+    "en": "Pages"
+  },
+  "webPart": {
+    "configTypeKey": "webPart_aggregation",
+    "itemTemplate": {
+      "configTypeKey": "itemTemplate_reachPages"
+    },
+    "layoutTemplate": {
+      "configTypeKey": "layoutTemplate_flow"
+    },
+    "dataProvider": {
+      "version": "v1.0",
+      "configTypeKey": "dataProvider_reach_pages",
+      "propertyMappings": "propertyMapper_reach_page_simple",
+      "connectableKey": "searchResults_reach_pages",
+      "rowLimit": 30,
+      "fromAllNews": true,
+      "searchText": {
+        "expression": "_mp.connectable.objects.searchForm"
+      }
+    },
+    "noItemsPlaceholder": {
+      "message": {
+        "expression": "_mp.util.translate('noContentFound')"
+      },
+      "icon": "search-document",
+      "style": {
+        "paddingTop": "60px",
+        "iconSize": "10rem",
+        "messageSize": "2em",
+        "color": "#fff"
+      }
+    }
+  }
+}
